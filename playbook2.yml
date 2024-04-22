@@ -1,0 +1,10 @@
+- name: create user administration
+  hosts: all
+  tasks:
+    - name: create users
+      user:
+        name: bannana
+        password: xd
+        comment: fruit
+        home: /home/bannana
+        shell: /bin/bash

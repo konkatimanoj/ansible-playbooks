@@ -1,0 +1,27 @@
+- name: install tomcat9 and tomact9-admin 
+  hosts: all
+  tasks:
+    - name: install tomcat9
+      apt:
+        name: tomcat9
+        state: present
+        update_cache: yes
+      tags: tomcat installing
+    - name: install tomcat9-admin
+      apt:
+        name: tomcat9-admin
+        state: present
+    - name: copy files
+      copy:
+        src: tomcat-user.xml
+        dest: /etc/tomcat9
+      tags: copy files
+    - name: change port number
+      replace:
+        regexp: 8080
+        replace: 9090
+        path: /etc/tomcat9/server.xml
+    - name: connectiviy
+      uri:
+        url: http://172.31.26.17
+        status_code: 200
